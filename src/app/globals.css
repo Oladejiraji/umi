@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "geist-thin";
+  src: url("/fonts/geist/Geist-thin.ttf") format("truetype");
+  font-weight: 100 900;
+  font-named-instance: "Thin";
+}
+
+@font-face {
+  font-family: "geist-bold";
+  src: url("/fonts/geist/Geist-Bold.ttf") format("truetype");
+  font-weight: 100 900;
+  font-named-instance: "Bold";
+}
+
+@font-face {
+  font-family: "geist-light";
+  src: url("/fonts/geist/Geist-Light.ttf") format("truetype");
+  font-weight: 100 900;
+  font-named-instance: "Light";
+}
+
+@font-face {
+  font-family: "geist-medium";
+  src: url("/fonts/geist/Geist-Medium.ttf") format("truetype");
+  font-weight: 100 900;
+  font-named-instance: "Medium";
+}
+
+@font-face {
+  font-family: "geist-regular";
+  src: url("/fonts/geist/Geist-Regular.ttf") format("truetype");
+  font-weight: 100 900;
+  font-named-instance: "Regular";
+}
+
+@font-face {
+  font-family: "geist-semibold";
+  src: url("/fonts/geist/Geist-SemiBold.ttf") format("truetype");
+  font-weight: 100 900;
+  font-named-instance: "SemiBold";
+}
+
+.main_linear_gradient {
+  background: linear-gradient(
+    180deg,
+    #252525 -19.48%,
+    rgba(37, 37, 37, 0.1) 146.75%
+  );
+}
+
+.upload_linear_gradient {
+  box-shadow: 0px 0px 0px 1px rgba(135, 117, 103, 0.2);
+}
+
+.preview_grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+}
