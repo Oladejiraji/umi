@@ -1,7 +1,11 @@
-import { AppRoutes } from "@/utils/routes";
-import { redirect } from "next/navigation";
+import { Header } from "@/components/landing";
+import React from "react";
 
 // Landing page can be here
 export default async function Index() {
-  return redirect(AppRoutes.dashboard.home.create.path);
+  return (
+    <main className="">
+      <Header />
+    </main>
+  );
 }

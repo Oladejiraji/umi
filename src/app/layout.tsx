@@ -1,10 +1,11 @@
 import { GeistSans } from "geist/font/sans";
-import "./globals.css";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import { Bounce, ToastContainer } from "react-toastify";
 import NextTopLoader from "nextjs-toploader";
 
 import "react-toastify/dist/ReactToastify.css";
+import "./globals.css";
+import "../../public/scss/main.scss";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -26,9 +27,7 @@ export default function RootLayout({
       <body className="bg-background text-foreground">
         <ReactQueryProvider>
           <NextTopLoader color="#920AF2" />
-          <main className="min-h-screen flex flex-col items-center">
-            {children}
-          </main>
+          <main className="min-h-screen">{children}</main>
           <ToastContainer
             position="top-right"
             autoClose={5000}

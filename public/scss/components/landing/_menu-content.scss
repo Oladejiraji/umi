@@ -1,0 +1,48 @@
+.app_menu_content {
+  &__ctt {
+    &__title {
+      font-family: var(--second-family);
+      font-weight: 500;
+      font-size: 14px;
+      color: #5d5d5d;
+      text-align: center;
+    }
+
+    &__notes {
+      font-family: var(--second-family);
+      font-weight: 500;
+      font-size: 16px;
+      color: #fff;
+    }
+  }
+
+  &__item {
+    &__label {
+      font-family: var(--second-family);
+      font-weight: 500;
+      font-size: 16px;
+      color: #adadad;
+    }
+
+    &__coming {
+      font-family: var(--second-family);
+      font-weight: 500;
+      font-size: 14px;
+      color: #5d5d5d;
+    }
+  }
+}
+
+.app_search_content {
+  &__input {
+    height: 30px;
+    background: transparent;
+    border: none;
+    font-family: var(--second-family);
+    font-weight: 500;
+    font-size: 16px;
+    color: #adadad;
+    width: 100%;
+    padding: 4px;
+  }
+}
