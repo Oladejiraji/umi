@@ -39,19 +39,19 @@ const Input = ({
   lefticon,
   ...rest
 }: InputProps) => {
-  const [isPasswordField, setIsPasswordField] = useState(type === "password");
+  const [isPasswordField, _] = useState(type === "password");
   return (
     <FormItem
       className={cx(
         "space-y-0",
         { "flex flex-col gap-1": !!label },
-        { [`${containerClass}`]: !!containerClass }
+        { [`${containerClass}`]: !!containerClass },
       )}
     >
       {label ? (
         <FormLabel
           className={cx(
-            "leading-[1.4rem] text-grey-100 font-geist-medium text-[15px] "
+            "font-geist-medium text-[15px] leading-[1.4rem] text-grey-100",
           )}
           htmlFor={id}
         >
@@ -67,7 +67,7 @@ const Input = ({
               </div>
             </RenderIf>
             <ShadInput
-              className="!mt-0 border h-11 border-grey-400 focus:ring-transparent focus-visible:ring-transparent"
+              className="!mt-0 h-11 border border-grey-400 focus:ring-transparent focus-visible:ring-transparent"
               id={id}
               // ref={ref}
               type={

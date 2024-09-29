@@ -2,10 +2,8 @@
 
 import { Button } from "@/components/shared";
 import { useImageContext } from "@/context/ImagesContext";
-import DashboardAssets from "@/lib/assets/dashboard";
 import { Left, Plus, Right } from "@/lib/svg/dashboard";
 import { AppRoutes } from "@/utils/routes";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -28,7 +26,7 @@ const Preview = () => {
             </div>
           </div>
         ))}
-        <Button className="bg-primary-700 h-full border-none">
+        <Button className="h-full border-none bg-primary-700">
           <div className="flex flex-col items-center justify-center">
             <Plus color="#868686" />
             <p className="font-geist-medium text-xs">Add Images</p>

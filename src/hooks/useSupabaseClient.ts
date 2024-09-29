@@ -1,10 +1,7 @@
 import { useMemo } from "react";
 import { createBrowserClient } from "@supabase/ssr";
-import { SupabaseClient } from "@supabase/supabase-js";
-import { Database } from "@/database/users";
 
-export type TypedSupabaseClient = SupabaseClient<Database>;
-let client: TypedSupabaseClient | undefined;
+let client: any;
 
 export function getSupabaseBrowserClient() {
   if (client) {
@@ -14,7 +11,7 @@ export function getSupabaseBrowserClient() {
   const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
   const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-  client = createBrowserClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY);
+  client = createBrowserClient<any>(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   return client;
 }

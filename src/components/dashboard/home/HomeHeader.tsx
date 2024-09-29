@@ -1,6 +1,5 @@
 "use client";
 import { Button, Search } from "@/components/shared";
-import Image from "next/image";
 import { default as SearchSvg } from "@/lib/svg/dashboard/Search";
 import React, { useState } from "react";
 import { Bell, Filter } from "@/lib/svg/dashboard";
