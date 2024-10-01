@@ -1,10 +1,12 @@
-import { Header } from "@/components/landing";
 import React from "react";
+import { Background, Header } from "@/components/landing";
 
 // Landing page can be here
-export default async function Index() {
+export default function Index() {
   return (
     <main className="">
+      <Background />
+
       <Header />
     </main>
   );

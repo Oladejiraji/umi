@@ -55,7 +55,8 @@
         "caughtErrorsIgnorePattern": "^_"
       }
     ],
-    "no-console": "off"
+    "no-console": "off",
+    "react/no-unknown-property": "off"
   },
   "settings": {
     "import/resolver": {
