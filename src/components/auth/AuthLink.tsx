@@ -12,16 +12,17 @@ interface IProps {
 const AuthLink = ({ text, path }: IProps) => {
   const router = useRouter();
   return (
-    <div className="absolute top-10 right-6">
+    <div className="absolute right-6 top-10">
       <Button
-        className="bg-grey-500 "
+        className="bg-grey-500"
         onClick={() => {
           router.push(path);
         }}
       >
         <div className="flex items-center justify-center">
           <p className="font-geist-medium text-xs">{text}</p>
-          <div className="w-4 h-10 flex items-center justify-center">
+          <div className="flex h-10 w-4 items-center justify-center">
+            endiure
             <Image src={AuthAssets.Right} alt="Right Icon" />
           </div>
         </div>
