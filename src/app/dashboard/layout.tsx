@@ -24,6 +24,7 @@ export default async function Layout(props: IProps) {
   return (
     <main className="app_dashboard_layout flex w-full flex-1">
       <div className="w-16 bg-primary-100">
+        endure
         <Sidebar />
       </div>
       <div className="flex-1">{children}</div>
