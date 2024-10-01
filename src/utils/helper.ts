@@ -11,3 +11,12 @@ export const errorToast = (message: string) => {
 export const defaultToast = (message: string) => {
   toast(message || "Successful!");
 };
+
+export function convertBoxLength(
+  targetLength = 72,
+  originalLength = 72,
+  originalScaledLength = 0.75,
+): number {
+  const scaleFactor = originalScaledLength / originalLength;
+  return targetLength * scaleFactor;
+}
