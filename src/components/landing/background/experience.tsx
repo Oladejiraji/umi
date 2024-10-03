@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import {
   Billboard,
   MeshDistortMaterial,
@@ -18,17 +18,46 @@ import {
 import RoundedRect from "./rounded-rect";
 import { bgCards } from "@/utils/static";
 import Effects from "./effects";
+import { easing } from "maath";
+
+const RADIUS = 5;
+const MOUSE_POSITION_FACTOR = 1000;
 
 export default function Experience() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const meshRef = useRef<Mesh<
     BufferGeometry<NormalBufferAttributes>,
     Material | Material[],
     Object3DEventMap
   > | null>(null);
 
-  useFrame(() => {
-    if (!meshRef.current) return;
-    // meshRef.current.rotation.y += 0.005;
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      setMousePosition({
+        x: (event.clientX - window.innerWidth / 2) / MOUSE_POSITION_FACTOR,
+        y: (event.clientY - window.innerHeight / 2) / MOUSE_POSITION_FACTOR,
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  useFrame((state, dt) => {
+    easing.damp3(
+      state.camera.position,
+      [
+        Math.sin(mousePosition.x) * RADIUS,
+        Math.atan(mousePosition.y) * RADIUS,
+        Math.cos(mousePosition.x) * RADIUS,
+      ],
+      0.25,
+      dt,
+    );
+    state.camera.lookAt(0, 0, 0);
   });
 
   return (
