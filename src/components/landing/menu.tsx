@@ -9,7 +9,7 @@ import SearchContent from "./search-content";
 const menuStateMap = {
   closed: {
     height: "52px",
-    maxWidth: "181px",
+    maxWidth: "172px",
   },
   menu: {
     height: "383px",
