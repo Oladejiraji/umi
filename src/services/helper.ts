@@ -7,6 +7,7 @@ export const saveLocalStorage = (data: any, key: string) => {
     localStorage.setItem(key, jsonData);
     return true;
   } catch (error) {
+    console.log(error);
     return false;
   }
 };
@@ -17,6 +18,7 @@ export const getLocalStorage = (key: string) => {
     if (!jsonData) return null;
     return JSON.parse(jsonData);
   } catch (error) {
+    console.log(error);
     return null;
   }
 };
@@ -25,6 +27,7 @@ export const clearLocalStorage = (key: string) => {
   try {
     localStorage.removeItem(key);
   } catch (error) {
+    console.log(error);
     return null;
   }
   return null;

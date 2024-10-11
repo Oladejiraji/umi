@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import cookies from "js-cookie";
 
 import api from "@/services/api";
-import { errorToast, successToast } from "@/utils/helper";
+import { successToast } from "@/utils/helper";
 
 export const SESSION_NAME = "umi-Session";
 const key = new TextEncoder().encode(process.env.NEXT_PUBLIC_AUTH_KEY);
