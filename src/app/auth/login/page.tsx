@@ -1,43 +1,32 @@
 "use client";
 
-import { Button, FormInput } from "@/components/shared";
-import AuthAssets from "@/lib/assets/auth";
-import logos from "@/lib/assets/logos";
 import Image from "next/image";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { signupSchema, TSignup } from "@/schema/auth/signupSchema";
-import { Form, FormField } from "@/components/ui/form";
-import { AuthLink } from "@/components/auth";
 import { AppRoutes } from "@/utils/routes";
 import { useRouter } from "next/navigation";
 import { errorToast } from "@/utils/helper";
-import { signIn } from "@/services/auth/queries";
+import AuthAssets from "@/lib/assets/auth";
+import { Formik } from "formik";
+import { loginSchema, TLogin } from "@/schema/auth/loginSchema";
+import { Button, FormInput } from "@/components/shared";
+import Link from "next/link";
+import { login } from "@/lib/auth";
+
+const initialValues = {
+  email: "",
+  password: "",
+};
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const form = useForm<TSignup>({
-    resolver: zodResolver(signupSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
 
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = form;
-
-  const onSubmit = async (values: TSignup) => {
+  const onSubmit = async (values: TLogin) => {
     setIsLoading(true);
     try {
-      await signIn(values);
+      await login(values);
       setIsLoading(false);
-      router.push(AppRoutes.dashboard.home.create.path);
+      router.push(AppRoutes.dashboard.home.path);
     } catch (error: any) {
       setIsLoading(false);
       errorToast(error.message);
@@ -45,64 +34,104 @@ const Login = () => {
   };
 
   return (
-    <div className="relative flex w-full flex-1 items-center justify-center">
-      <AuthLink path={AppRoutes.auth.signup.path} text="Sign Up" />
-      <div className="flex w-auto max-w-[328px] flex-col items-center">
-        <div className="flex flex-col items-center gap-3 text-center">
-          <div className="h-8 w-8">
-            <Image src={logos.logo} alt="Umi Logo" />
+    <>
+      <div className="flex justify-end">
+        <Link href={AppRoutes.auth.signup.path}>
+          <div className="flex items-center justify-center gap-2">
+            <h3 className="font-geist-regular text-base text-[#9F9F9F]">
+              Create Account
+            </h3>
+            <div>
+              <Image alt="Create an account icon" src={AuthAssets.C} />
+            </div>
           </div>
-          <h1 className="font-geist-semibold text-2xl">Your email address</h1>
+        </Link>
+      </div>
+      <div className="relative flex w-full flex-1 flex-col items-center justify-center gap-16">
+        <div>
+          <Image src={AuthAssets.Umi} alt="umi logo" />
         </div>
-        <div className="flex flex-col gap-2">
-          <Form {...form}>
-            <form className="" onSubmit={handleSubmit(onSubmit, () => {})}>
-              <div className="mb-4 mt-8">
-                <FormField
-                  control={control}
-                  name="email"
-                  render={({ field: { ref: _ref, ...rest } }) => (
+        <div>
+          <h1 className="pb-7 text-center font-geist-medium text-xl text-[#5D5D5D]">
+            Log In
+          </h1>
+          <Formik
+            onSubmit={onSubmit}
+            initialValues={initialValues}
+            validationSchema={loginSchema}
+          >
+            {(props) => {
+              const {
+                values,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                errors,
+                touched,
+              } = props;
+              return (
+                <form
+                  onSubmit={handleSubmit}
+                  className="min-w-[300px] rounded-[25px] px-0 py-8 backdrop-blur-[16px] sm:min-w-[434px] sm:px-14 sm:py-14"
+                >
+                  <div className="pb-3">
                     <FormInput
-                      label="Email Address"
-                      error={errors.email}
-                      containerClass="mb-4"
-                      className="pl-8"
-                      lefticon={
-                        <div className="flex h-8 w-8 items-center justify-center">
-                          <Image src={AuthAssets.User} alt="Umi Logo" />
-                        </div>
-                      }
-                      {...rest}
+                      name="email"
+                      label="Email"
+                      id="email"
+                      placeholder="Enter your email address"
+                      value={values.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      errors={errors}
+                      touched={touched}
                     />
-                  )}
-                />
-                <FormField
-                  control={control}
-                  name="password"
-                  render={({ field: { ref: _ref, ...rest } }) => (
+                  </div>
+                  <div>
                     <FormInput
-                      label="Password"
-                      error={errors.password}
+                      name="password"
+                      id="password"
                       type="password"
-                      containerClass=""
-                      {...rest}
+                      label="Password"
+                      placeholder="Password"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      errors={errors}
+                      touched={touched}
                     />
-                  )}
-                />
-              </div>
-
-              <Button
-                loading={isLoading}
-                className="h-11 w-[328px] bg-grey-500 font-geist-medium"
-                variant="default"
-              >
-                <p>Sign In</p>
-              </Button>
-            </form>
-          </Form>
+                  </div>
+                  <div className="pb-4 pt-8">
+                    <Button
+                      type="submit"
+                      className="w-full"
+                      loading={isLoading}
+                    >
+                      <p>Continue</p>
+                    </Button>
+                  </div>
+                  <div>
+                    <Link href="#">
+                      <p className="text-center font-geist-medium text-base text-[#6D6D6D] underline">
+                        I can't remember my password
+                      </p>
+                    </Link>
+                  </div>
+                </form>
+              );
+            }}
+          </Formik>
         </div>
       </div>
-    </div>
+      <div className="flex items-center gap-4 font-geist-medium text-base text-[#494949]">
+        <Link href="#">
+          <p>Terms of Privacy</p>
+        </Link>
+        <Link href="#">
+          <p>Privacy Policy</p>
+        </Link>
+      </div>
+    </>
   );
 };
 

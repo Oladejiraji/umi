@@ -4,6 +4,7 @@ import cx from "classnames";
 
 import { Button as ShadCNButton } from "@/components/ui/button";
 import Loader from "../Loader";
+import Loader2 from "../Loader/Loader2";
 
 interface IButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string;
@@ -29,16 +30,16 @@ const Button = (props: IButton) => {
         disabled={loading || disabled}
         variant={variant}
         className={cx(
-          `${className} font-geist-500 gap-1`,
+          `${className} font-geist-500 h-12 gap-1`,
           {
-            "bg-neutral-150 cursor-not-allowed border-neutral-500": disabled,
+            "opacity-80": disabled,
           },
           { "cursor-progress opacity-85": loading },
         )}
         type={type}
         {...rest}
       >
-        {loading ? <Loader /> : children}
+        {loading ? <Loader2 /> : children}
       </ShadCNButton>
     </>
   );

@@ -4,6 +4,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="w-full max-w-[1200px] mx-auto flex-1 flex">{children}</div>
+    <div className="items-between mx-auto flex h-full min-h-screen w-full max-w-[1200px] flex-col justify-center px-[20px] py-[46px] sm:px-[100px]">
+      {children}
+    </div>
   );
 }

@@ -1,1 +1,1 @@
-export { default as AuthLink } from "./AuthLink";
+export { default as PanelSelect } from "./PanelSelect";

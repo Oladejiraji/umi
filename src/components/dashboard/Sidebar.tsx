@@ -2,9 +2,6 @@
 import DashboardAssets from "@/lib/assets/dashboard";
 import { Help, Out, Settings } from "@/lib/svg/dashboard";
 import Search from "@/lib/svg/dashboard/Search";
-import { signOut } from "@/services/auth/queries";
-import { errorToast } from "@/utils/helper";
-import { AppRoutes } from "@/utils/routes";
 import { SidebarLinks } from "@/utils/static";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,17 +12,17 @@ import { motion } from "framer-motion";
 const Sidebar = () => {
   const router = useRouter();
   const signoutHandler = async () => {
-    try {
-      await signOut();
-      router.push(AppRoutes.auth.login.path);
-    } catch (error: any) {
-      errorToast(error.message);
-    }
+    // try {
+    //   await signOut();
+    //   router.push(AppRoutes.auth.login.path);
+    // } catch (error: any) {
+    //   errorToast(error.message);
+    // }
   };
   return (
-    <aside className="p-4 flex flex-col justify-between h-full">
+    <aside className="flex h-full flex-col justify-between p-4">
       <div className="flex flex-col items-center gap-16">
-        <div className="w-8 h-8">
+        <div className="h-8 w-8">
           <Image src={DashboardAssets.Avatar} alt="Umi Logo" />
         </div>
         <Link href="#">
@@ -40,13 +37,13 @@ const Sidebar = () => {
             <div key={i} className="relative">
               {active && (
                 <motion.div
-                  className="absolute top-0 left-0 h-full w-full bg-grey-700 rounded-[7px]"
+                  className="absolute left-0 top-0 h-full w-full rounded-[7px] bg-grey-700"
                   layoutId="sidebar-main-links"
                 />
               )}
               <Link
                 href={link.route}
-                className="w-10 h-10 flex items-center justify-center bg-transparent relative"
+                className="relative flex h-10 w-10 items-center justify-center bg-transparent"
               >
                 {link.icon(activeColor)}
               </Link>
@@ -58,20 +55,20 @@ const Sidebar = () => {
       <div className="flex flex-col items-center gap-2">
         <Link
           href="#"
-          className="w-10 h-10 flex items-center justify-center rounded-[7px]"
+          className="flex h-10 w-10 items-center justify-center rounded-[7px]"
         >
           <Help />
         </Link>
         <Link
           href="#"
-          className="w-10 h-10 flex items-center justify-center rounded-[7px]"
+          className="flex h-10 w-10 items-center justify-center rounded-[7px]"
         >
           <Settings />
         </Link>
         <button
           title="Logout"
           onClick={signoutHandler}
-          className="w-10 h-10 flex items-center justify-center rounded-[7px]"
+          className="flex h-10 w-10 items-center justify-center rounded-[7px]"
         >
           <Out />
         </button>
