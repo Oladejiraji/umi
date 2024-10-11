@@ -50,7 +50,6 @@ const refreshToken = async (
     // delete
     clearLocalStorage(config.tokenKey);
     setTimeout(() => {
-      // useNavigator(`${routes.auth.login.path}`);
       window.location.href = `${AppRoutes.auth.login.path}?next=${window.location.pathname}`;
     }, 1000);
     return await Promise.reject(error);
