@@ -5,12 +5,10 @@ import Search from "@/lib/svg/dashboard/Search";
 import { SidebarLinks } from "@/utils/static";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React from "react";
 import { motion } from "framer-motion";
 
 const Sidebar = () => {
-  const router = useRouter();
   const signoutHandler = async () => {
     // try {
     //   await signOut();

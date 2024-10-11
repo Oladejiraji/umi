@@ -3,7 +3,7 @@ import keys from "./keys";
 import api from "../api";
 import { TInfo } from "@/schema/auth/infoSchema";
 import { GenericResponse } from "../generalTypes";
-import { errorToast, successToast } from "@/utils/helper";
+import { errorToast } from "@/utils/helper";
 import { handleErrors } from "../helper";
 import { useRouter } from "next/navigation";
 import { AppRoutes } from "@/utils/routes";
