@@ -1,3 +1,4 @@
+import { FormikErrors, FormikTouched } from "formik";
 import { toast } from "react-toastify";
 
 export const successToast = (message: string) => {
@@ -20,3 +21,12 @@ export function convertBoxLength(
   const scaleFactor = originalScaledLength / originalLength;
   return targetLength * scaleFactor;
 }
+
+export const checkErrorManually = <T>(
+  errors: FormikErrors<T>,
+  touched: FormikTouched<T>,
+  value: T,
+  name: keyof T,
+) => {
+  return (errors[name] && touched[name]) || false || !value[name];
+};

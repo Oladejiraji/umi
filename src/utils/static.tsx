@@ -1,12 +1,4 @@
-import {
-  Bell,
-  Docs,
-  Gallery,
-  Home,
-  Stats,
-  Terms,
-  Vr,
-} from "@/lib/svg/dashboard";
+import { Bell, Gallery, Home, Stats, Vr } from "@/lib/svg/dashboard";
 import { AppRoutes } from "./routes";
 import { convertBoxLength } from "./helper";
 
@@ -33,30 +25,7 @@ export const SidebarLinks = [
   },
 ];
 
-export const HomeSidebarLinks = [
-  {
-    route: AppRoutes.dashboard.home.create.path,
-    text: "Create Gallery",
-  },
-  {
-    route: AppRoutes.dashboard.home.edit.path,
-    text: "Edit Gallery",
-  },
-  {
-    route: AppRoutes.dashboard.home.templates.path,
-    text: "Templates",
-  },
-  {
-    route: AppRoutes.dashboard.home.docs.path,
-    text: "Documentation",
-    icon: (color: string) => <Docs color={color} />,
-  },
-  {
-    route: AppRoutes.dashboard.home.terms.path,
-    text: "Terms and Condition",
-    icon: (color: string) => <Terms color={color} />,
-  },
-];
+export const HomeSidebarLinks = [];
 
 export const bgCards = [
   {
@@ -130,4 +99,24 @@ export const bgCards = [
     radius: convertBoxLength(22),
     position: [1.9, 0.6, 0.6],
   },
+];
+
+export const ProfessionOptions = [
+  { label: "Visual Designer", value: "Visual Designer" },
+  { label: "Digital Artist", value: "Digital Artist" },
+  { label: "Photographer", value: "Photographer" },
+  { label: "Motion Designer", value: "Motion Designer" },
+  { label: "Other", value: "Other" },
+];
+
+export const UmiUsageOptions = [
+  { label: "I'd just like to explore", value: "I'd just like to explore" },
+  { label: "Design Inspiration", value: "Design Inspiration" },
+  {
+    label: "I came to scout the competition",
+    value: "I came to scout the competition",
+  },
+  { label: "Portfolio", value: "Portfolio" },
+  { label: "Don't know", value: "Don't know" },
+  { label: "Other", value: "Other" },
 ];

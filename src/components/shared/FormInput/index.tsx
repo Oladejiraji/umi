@@ -1,47 +1,61 @@
 "use client";
-import React, { ReactNode, useState } from "react";
+import React, {
+  ReactNode,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import cx from "classnames";
-import { type FieldError } from "react-hook-form";
-
 import { Input as ShadInput } from "../../ui/input";
-import {
-  FormControl,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import { RenderIf } from "../render-if";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   containerClass?: string;
-  error?: FieldError;
+  className?: string;
+  errors?: any;
+  touched?: any;
   subText?: string;
   details?: string;
   lefticon?: ReactNode;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
+  name: string;
+  validate?: boolean;
+  ref?: RefObject<HTMLInputElement>;
+  focusOnMount?: boolean;
 }
-
-/**
- *
- * NOTE: Must be used in a Form(shadcn form)
- */
 
 const Input = ({
   label,
   containerClass,
-  error,
+  errors,
+  touched,
   id,
   required,
   type = "text",
   subText,
   details,
   lefticon,
+  onChange,
+  onBlur,
+  name,
+  validate = true,
+  focusOnMount = false,
+  className,
   ...rest
 }: InputProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [isPasswordField, _] = useState(type === "password");
+  const hasError = ((errors[name] && touched[name]) || false) && validate;
+  useEffect(() => {
+    if (!focusOnMount) return;
+    inputRef.current?.focus();
+  }, []);
   return (
-    <FormItem
+    <div
       className={cx(
         "space-y-0",
         { "flex flex-col gap-1": !!label },
@@ -49,16 +63,16 @@ const Input = ({
       )}
     >
       {label ? (
-        <FormLabel
+        <label
           className={cx(
-            "font-geist-medium text-[15px] leading-[1.4rem] text-grey-100",
+            "font-geist-medium text-base leading-[1.4rem] text-[#5D5D5D]",
           )}
           htmlFor={id}
         >
           {label} {required && <span className="text-danger-50">*</span>}
-        </FormLabel>
+        </label>
       ) : null}
-      <FormControl className="">
+      <div className="">
         <div className={cx({ "flex items-center gap-4": details })}>
           <div className={cx("relative", { "w-[60%]": details })}>
             <RenderIf condition={!!lefticon}>
@@ -67,9 +81,15 @@ const Input = ({
               </div>
             </RenderIf>
             <ShadInput
-              className="!mt-0 h-11 border border-grey-400 focus:ring-transparent focus-visible:ring-transparent"
+              className={cx(
+                "!mt-0 h-11 border border-[#1E1E1E] bg-[#171717] outline-0 focus:outline-0 focus:ring-transparent focus-visible:ring-transparent",
+                { "border-[red]": !!hasError },
+                { [`${className}`]: !!className },
+              )}
               id={id}
-              // ref={ref}
+              ref={inputRef}
+              onChange={onChange}
+              onBlur={onBlur}
               type={
                 isPasswordField
                   ? "password"
@@ -84,14 +104,14 @@ const Input = ({
             <p>{details}</p>
           </RenderIf>
         </div>
-      </FormControl>
-      {!!error && <FormMessage className="text-xs text-red-500" />}
+      </div>
+      {!!hasError && <p className="text-xs text-red-500">{errors[name]}</p>}
       {subText && (
         <p className="mt-0.5 text-xs font-normal leading-4 text-neutral-600">
           {subText}
         </p>
       )}
-    </FormItem>
+    </div>
   );
 };
 
