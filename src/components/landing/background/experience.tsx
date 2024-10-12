@@ -1,11 +1,6 @@
 "use client";
 import React, { Fragment, useEffect, useRef, useState } from "react";
-import {
-  Billboard,
-  MeshDistortMaterial,
-  OrbitControls,
-  Sphere,
-} from "@react-three/drei";
+import { Billboard, MeshDistortMaterial, Sphere } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import {
   BufferGeometry,
@@ -21,7 +16,7 @@ import Effects from "./effects";
 import { easing } from "maath";
 
 const RADIUS = 5;
-const MOUSE_POSITION_FACTOR = 1000;
+// const MOUSE_POSITION_FACTOR = 1000;
 
 export default function Experience() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -33,9 +28,14 @@ export default function Experience() {
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
+      // setMousePosition({
+      //   x: (event.clientX - window.innerWidth / 2) / MOUSE_POSITION_FACTOR,
+      //   y: (event.clientY - window.innerHeight / 2) / MOUSE_POSITION_FACTOR,
+      // });
+
       setMousePosition({
-        x: (event.clientX - window.innerWidth / 2) / MOUSE_POSITION_FACTOR,
-        y: (event.clientY - window.innerHeight / 2) / MOUSE_POSITION_FACTOR,
+        x: (event.clientX * 2) / window.innerWidth - 1,
+        y: -((event.clientY * 2) / window.innerHeight - 1),
       });
     };
 
@@ -47,6 +47,8 @@ export default function Experience() {
   }, []);
 
   useFrame((state, dt) => {
+    // console.log(state.pointer.y);
+
     easing.damp3(
       state.camera.position,
       [
@@ -62,7 +64,7 @@ export default function Experience() {
 
   return (
     <Fragment>
-      <OrbitControls />
+      {/* <OrbitControls /> */}
 
       <mesh position={[0, 0, 0]} ref={meshRef}>
         <mesh>
