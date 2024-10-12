@@ -6,8 +6,10 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  pointer-events: none;
 
   &__ctt {
+    pointer-events: all;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     background: linear-gradient(
