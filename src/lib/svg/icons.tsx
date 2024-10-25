@@ -141,3 +141,20 @@ export function Coffee() {
     </svg>
   );
 }
+
+export function ArrowForward() {
+  return (
+    <svg
+      width="21"
+      height="20"
+      viewBox="0 0 21 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M14.0016 10.5416H4.91663V9.45829H14.0016L9.73392 5.19058L10.5 4.41663L16.0833 9.99996L10.5 15.5833L9.73392 14.8093L14.0016 10.5416Z"
+        fill="#FDFDFD"
+      />
+    </svg>
+  );
+}

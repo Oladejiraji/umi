@@ -1,0 +1,122 @@
+:root {
+  --header-height: 55px;
+}
+
+.app_landing {
+  height: 100%;
+
+  &__ctt {
+    position: relative;
+    z-index: 9;
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 100%;
+    // margin-top: calc(3rem + var(--header-height));
+    display: flex;
+    gap: 4rem;
+    padding: 2rem 1rem;
+    padding-top: calc(10rem + var(--header-height));
+
+    &__left {
+      max-width: 193px;
+      width: 100%;
+
+      &__ctt {
+        &__btn {
+          border: 1px solid #505050;
+          border-radius: 34px;
+          padding: 6px 12px;
+          font-family: var(--font-family);
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 125%;
+          color: #7b7b7b;
+        }
+
+        &__text {
+          font-family: var(--font-family);
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 125%;
+          color: #7b7b7b;
+        }
+      }
+    }
+
+    &__center {
+      flex: 1;
+
+      &__early {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        border-radius: 20px;
+        padding: 6px 16px;
+        backdrop-filter: blur(15px);
+        background: #323232;
+
+        &__text {
+          font-family: var(--font-family);
+          font-weight: 500;
+          font-size: 14px;
+          color: #7b7b7b;
+        }
+      }
+
+      &__banner {
+        &__big {
+          font-family: var(--font-family);
+          font-weight: 500;
+          font-size: 40px;
+          line-height: 120%;
+          text-align: center;
+          color: #adadad;
+          max-width: 465px;
+        }
+
+        &__small {
+          font-family: var(--font-family);
+          font-weight: 500;
+          font-size: 17px;
+          line-height: 129%;
+          text-align: center;
+          color: #7b7b7b;
+        }
+      }
+
+      &__btn {
+        border-radius: 8px;
+        padding: 9px 12px;
+        background: #ebebeb;
+        font-family: var(--font-family);
+        font-weight: 500;
+        font-size: 17px;
+        line-height: 129%;
+        text-align: center;
+        color: #505050;
+      }
+    }
+
+    &__right {
+      max-width: 193px;
+      width: 100%;
+      align-self: flex-end;
+
+      &__ctt {
+        &__text {
+          font-family: var(--font-family);
+          font-size: 16px;
+          line-height: 125%;
+          font-weight: 400;
+          color: #fff;
+
+          &__light {
+            color: #7b7b7b;
+            font-style: italic;
+            font-weight: 300;
+          }
+        }
+      }
+    }
+  }
+}
