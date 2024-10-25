@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 import { Billboard, MeshDistortMaterial, Sphere } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import {
@@ -19,7 +19,8 @@ const RADIUS = 5;
 // const MOUSE_POSITION_FACTOR = 1000;
 
 export default function Experience() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const mousePosition = useRef({ x: 0, y: 0 });
+
   const meshRef = useRef<Mesh<
     BufferGeometry<NormalBufferAttributes>,
     Material | Material[],
@@ -28,16 +29,18 @@ export default function Experience() {
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
-      // setMousePosition({
-      //   x: (event.clientX - window.innerWidth / 2) / MOUSE_POSITION_FACTOR,
-      //   y: (event.clientY - window.innerHeight / 2) / MOUSE_POSITION_FACTOR,
-      // });
-
-      setMousePosition({
+      mousePosition.current = {
         x: (event.clientX * 2) / window.innerWidth - 1,
         y: -((event.clientY * 2) / window.innerHeight - 1),
-      });
+      };
     };
+
+    // if (meshRef.current) {
+    //   const boundingBox = new Box3().setFromObject(meshRef.current);
+    //   const newSize = new Vector3();
+    //   boundingBox.getSize(newSize);
+    //   console.log(newSize);
+    // }
 
     window.addEventListener("mousemove", handleMouseMove);
 
@@ -52,9 +55,9 @@ export default function Experience() {
     easing.damp3(
       state.camera.position,
       [
-        Math.sin(mousePosition.x) * RADIUS,
-        Math.atan(mousePosition.y) * RADIUS,
-        Math.cos(mousePosition.x) * RADIUS,
+        Math.sin(mousePosition?.current?.x) * RADIUS,
+        Math.atan(mousePosition?.current?.y) * RADIUS,
+        Math.cos(mousePosition?.current?.x) * RADIUS,
       ],
       0.25,
       dt,
@@ -66,7 +69,7 @@ export default function Experience() {
     <Fragment>
       {/* <OrbitControls /> */}
 
-      <mesh position={[0, 0, 0]} ref={meshRef}>
+      <mesh position={[0, -1.5, 0]} ref={meshRef}>
         <mesh>
           <pointLight intensity={20} color="#fff" power={300} />
           <Sphere args={[0.2, 32, 32]}>
